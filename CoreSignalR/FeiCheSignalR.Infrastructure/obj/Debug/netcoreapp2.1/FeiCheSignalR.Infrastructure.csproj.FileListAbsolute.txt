@@ -1,8 +1,0 @@
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\bin\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.deps.json
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\bin\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.dll
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\bin\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.pdb
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.csproj.CoreCompileInputs.cache
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.AssemblyInfoInputs.cache
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.AssemblyInfo.cs
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.dll
-E:\BiHuManBu\Git\FeiCheMessage\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.pdb
