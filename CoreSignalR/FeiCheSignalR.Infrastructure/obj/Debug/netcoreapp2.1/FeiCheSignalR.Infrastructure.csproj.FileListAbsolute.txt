@@ -14,3 +14,12 @@ C:\Users\yf\Desktop\新建文件夹\FeiCheMessageCenter\FeiCheSignalR.Infrastruc
 C:\Users\yf\Desktop\新建文件夹\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.AssemblyInfo.cs
 C:\Users\yf\Desktop\新建文件夹\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.dll
 C:\Users\yf\Desktop\新建文件夹\FeiCheMessageCenter\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.pdb
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\bin\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.deps.json
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\bin\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.dll
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\bin\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.pdb
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.csprojAssemblyReference.cache
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.csproj.CoreCompileInputs.cache
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.AssemblyInfoInputs.cache
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.AssemblyInfo.cs
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.dll
+E:\BiHuManBu\GitHub\CoreSignalR\CoreSignalR\FeiCheSignalR.Infrastructure\obj\Debug\netcoreapp2.1\FeiCheSignalR.Infrastructure.pdb

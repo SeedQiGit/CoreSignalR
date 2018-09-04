@@ -1720,11 +1720,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yf\\Desktop\\新建文件夹\\FeiCheMessageCenter\\FeiCheSignalR.Models\\FeiCheSignalR.Models.csproj",
+      "projectUniqueName": "E:\\BiHuManBu\\GitHub\\CoreSignalR\\CoreSignalR\\FeiCheSignalR.Models\\FeiCheSignalR.Models.csproj",
       "projectName": "FeiCheSignalR.Models",
-      "projectPath": "C:\\Users\\yf\\Desktop\\新建文件夹\\FeiCheMessageCenter\\FeiCheSignalR.Models\\FeiCheSignalR.Models.csproj",
+      "projectPath": "E:\\BiHuManBu\\GitHub\\CoreSignalR\\CoreSignalR\\FeiCheSignalR.Models\\FeiCheSignalR.Models.csproj",
       "packagesPath": "C:\\Users\\yf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yf\\Desktop\\新建文件夹\\FeiCheMessageCenter\\FeiCheSignalR.Models\\obj\\",
+      "outputPath": "E:\\BiHuManBu\\GitHub\\CoreSignalR\\CoreSignalR\\FeiCheSignalR.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
@@ -1745,8 +1745,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\yf\\Desktop\\新建文件夹\\FeiCheMessageCenter\\FeiCheSignalR.Infrastructure\\FeiCheSignalR.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\yf\\Desktop\\新建文件夹\\FeiCheMessageCenter\\FeiCheSignalR.Infrastructure\\FeiCheSignalR.Infrastructure.csproj"
+            "E:\\BiHuManBu\\GitHub\\CoreSignalR\\CoreSignalR\\FeiCheSignalR.Infrastructure\\FeiCheSignalR.Infrastructure.csproj": {
+              "projectPath": "E:\\BiHuManBu\\GitHub\\CoreSignalR\\CoreSignalR\\FeiCheSignalR.Infrastructure\\FeiCheSignalR.Infrastructure.csproj"
             }
           }
         }
