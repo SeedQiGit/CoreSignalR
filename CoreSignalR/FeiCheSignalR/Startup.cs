@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FeiCheSignalR.Filters;
+﻿using FeiCheSignalR.Filters;
 using FeiCheSignalR.Hubs;
 using FeiCheSignalR.Infrastructure.Configuration;
 using FeiCheSignalR.Infrastructure.Helper;
@@ -10,20 +6,18 @@ using FeiCheSignalR.Middlewares;
 using FeiCheSignalR.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using NLog.Extensions.Logging;
 
 namespace FeiCheSignalR
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
              .SetBasePath(env.ContentRootPath)
@@ -65,10 +59,7 @@ namespace FeiCheSignalR
             {
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
-
-
             services.AddScoped(typeof(MessageCenterService));
-
 
             #region 配置
 
