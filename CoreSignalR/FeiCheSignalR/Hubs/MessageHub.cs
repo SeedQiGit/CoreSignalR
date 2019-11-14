@@ -1,16 +1,9 @@
 ﻿using FeiCheSignalR.Infrastructure.Helper;
-using FeiCheSignalR.Models.EnumModel;
-using FeiCheSignalR.Models.Response;
-using FeiCheSignalR.Models.ViewModel;
 using FeiCheSignalR.Services;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FeiCheSignalR.Hubs
