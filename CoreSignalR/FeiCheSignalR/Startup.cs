@@ -44,7 +44,8 @@ namespace FeiCheSignalR
                                     .AllowCredentials());
             });
 
-            services.AddSignalR();
+            //增加redis负载
+            services.AddSignalR().AddStackExchangeRedis(ConfigurationManager.GetValue("SignalrStoreConnectionString"));
 
             services.AddMvc(opt =>
             {
