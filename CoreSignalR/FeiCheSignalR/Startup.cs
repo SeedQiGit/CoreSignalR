@@ -9,6 +9,7 @@ using FeiCheSignalR.Middlewares;
 using FeiCheSignalR.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -54,9 +55,10 @@ namespace FeiCheSignalR
                 options.Configuration.ChannelPrefix = "MyApp";
             });
 
+            services.AddSingleton<IXmlRepository, CustomFileXmlRepository>();
             services.AddDataProtection(configure =>
             {
-                configure.ApplicationDiscriminator = "Htw.Web";
+                configure.ApplicationDiscriminator = "MyApp";
             });
 
             services.AddMvc(opt =>
