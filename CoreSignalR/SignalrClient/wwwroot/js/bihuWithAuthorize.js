@@ -7,6 +7,20 @@ var loginToken="eyJhbGciOiJSUzI1NiIsImtpZCI6IjlDRDQ4NDI3QzVDMEJCMjBBQTU5NThGODcy
 
 var connection = new signalR.HubConnectionBuilder().withUrl(hubUrl,{ accessTokenFactory: () => loginToken }).build();
 
+async function start() {
+    try {
+        await connection.start();
+        console.log("connected");
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+}
+//自动重连，3.0以下要自己写重连代码
+connection.onclose(async () => {
+    await start();
+});
+
 //Disable send button until connection is established
 document.getElementById("sendButton").disabled = true;
 

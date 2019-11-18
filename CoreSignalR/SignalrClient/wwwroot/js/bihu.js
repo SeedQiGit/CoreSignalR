@@ -8,6 +8,22 @@ var connection = new signalR.HubConnectionBuilder().withUrl(hubUrl).build();
 //Disable send button until connection is established
 document.getElementById("sendButton").disabled = true;
 
+async function start() {
+    try {
+        await connection.start();
+        console.log("connected");
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+};
+
+connection.onclose(async () => {
+    await start();
+});
+
+
+
 connection.on("ReceiveMessage", function (user, message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var encodedMsg = user + " says " + msg;

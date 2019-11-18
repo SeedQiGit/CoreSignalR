@@ -54,6 +54,11 @@ namespace FeiCheSignalR
                 options.Configuration.ChannelPrefix = "MyApp";
             });
 
+            services.AddDataProtection(configure =>
+            {
+                configure.ApplicationDiscriminator = "Htw.Web";
+            });
+
             services.AddMvc(opt =>
             {
                 // 跨域
