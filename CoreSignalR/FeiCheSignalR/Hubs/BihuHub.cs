@@ -18,27 +18,31 @@ namespace FeiCheSignalR.Hubs
 
         }
 
-        public async Task Join(int userId)
-        {
-            _logger.LogInformation("用户建立了连接"+userId);
-            await Groups.AddToGroupAsync(Context.ConnectionId, userId.ToString());
-        }
-
         /// <summary>
-        /// 这个是认证授权之后使用的 目前还是按照老的方式去做 todo 
+        /// 这个是认证授权之后使用的 
         /// </summary>
         /// <returns></returns>
         public override async Task OnConnectedAsync()
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, Context.User.Claims.FirstOrDefault(c=>c.Type=="sub")?.Value);
+            var sub =Context.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            _logger.LogInformation("已经连接:"+sub+"连接id："+Context.ConnectionId);
+            await Groups.AddToGroupAsync(Context.ConnectionId, sub);
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception ex)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, Context.User.Identity.Name);
+            var sub =Context.User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+            _logger.LogInformation("断开连接:"+sub+"连接id："+Context.ConnectionId);
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, sub);
             await base.OnDisconnectedAsync(ex);
         }
 
+        //老的join方法，改为认证授权时候建立连接了。
+        //public async Task Join(int userId)
+        //{
+        //    _logger.LogInformation("用户建立了连接"+userId);
+        //    await Groups.AddToGroupAsync(Context.ConnectionId, userId.ToString());
+        //}
     }
 }

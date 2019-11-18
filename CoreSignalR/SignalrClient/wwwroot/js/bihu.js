@@ -1,6 +1,6 @@
 ﻿//"use strict";
 
-var hubUrl = 'http://localhost:5008/bihuHub';
+var hubUrl = 'http://localhost:5009/bihuHub';
 //var httpConnection = new signalR.HttpConnection(hubUrl);
 //var connection = new signalR.HubConnection(httpConnection);
 var connection = new signalR.HubConnectionBuilder().withUrl(hubUrl).build();
