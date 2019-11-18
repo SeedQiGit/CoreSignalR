@@ -50,7 +50,9 @@ namespace FeiCheSignalR
             });
 
             //增加redis负载
-            services.AddSignalR().AddStackExchangeRedis(ConfigurationManager.GetValue("SignalrStoreConnectionString"));
+            services.AddSignalR().AddStackExchangeRedis(ConfigurationManager.GetValue("SignalrStoreConnectionString"), options => {
+                options.Configuration.ChannelPrefix = "MyApp";
+            });
 
             services.AddMvc(opt =>
             {
