@@ -23,7 +23,7 @@ namespace CoreSignalR3.Controllers
         [ProducesResponseType(typeof(BasePageResponse<BaseResponse>), 1)]
         public async Task<BaseResponse>  PushMessage([FromBody]PushMessageRequest request)
         {
-            var message = JsonSerializer.Serialize (request);
+            var message = JsonSerializer.Serialize(request);
             _logger.LogInformation("PushMessage:" + message);
            
             await _hubcontext.Clients.Group(request.UserId.ToString()).SendAsync("PushMessage",message);

@@ -2,17 +2,22 @@ using Infrastructure.Extensions;
 using Infrastructure.Middlewares;
 using Infrastructure.Model.Enums;
 using Infrastructure.Model.Response;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Redis;
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using Microsoft.AspNetCore.DataProtection;
-using StackExchange.Redis;
+using System.Threading.Tasks;
 
 namespace CoreSignalR3
 {
@@ -76,6 +81,60 @@ namespace CoreSignalR3
 
             #endregion
 
+            #region Authentication
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Events = new JwtBearerEvents()
+                {
+                    OnChallenge = async context =>
+                    {
+                        //var data = new BaseResponse(BusinessStatusType.Unauthorized);
+                        //var result = JsonConvert.SerializeObject(data);
+                        var result = " {\"code\":401,\"message\":\"ÊÚÈ¨Ê§°Ü\",\"data\":null}";
+                        //»á±¨StatusCode cannot be set because the response has already started.
+                        //context.Response.StatusCode = 401;
+                        context.Response.ContentType = "application/json;charset=utf-8";
+                        await context.Response.WriteAsync(result);
+                    },
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/bihuHub")))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+                options.Authority = SettingManager.GetValue("Authority");
+                options.RequireHttpsMetadata = false;
+                options.Audience = "employee_center";
+                //options.TokenValidationParameters.ValidIssuer = "null";
+                options.TokenValidationParameters.ValidateIssuer = false;
+                options.TokenValidationParameters.ValidateIssuerSigningKey = false;
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ClockSkew = TimeSpan.FromMinutes(30)
+                };
+            });
+
+            #endregion
+
+            #region SignalR
+
             services.AddSignalR();
 
             services
@@ -84,6 +143,8 @@ namespace CoreSignalR3
                 {
                     options.Configuration.ChannelPrefix = "bihuHub";
                 });
+
+            #endregion
 
             #region DataProtectionÃÜÔ¿¹²Ïí
 
@@ -105,8 +166,6 @@ namespace CoreSignalR3
 
             #endregion
 
-           
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -120,14 +179,21 @@ namespace CoreSignalR3
             
             // ÅäÖÃ¿çÓò
             app.UseCors("CorsPolicy");
-
+    
             app.UseRouting();
+            // app.UseAuthorization() must appear between app.UseRouting() and app.UseEndpoints(...).
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseExceptionHandling();
            
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<NoAuthorizeHub>("/noAuthorizeHub");
+                endpoints.MapHub<NoAuthorizeHub>("/noAuthorizeHub",options =>
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
+                endpoints.MapHub<BihuHub>("/bihuHub",options =>
+                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action}");
