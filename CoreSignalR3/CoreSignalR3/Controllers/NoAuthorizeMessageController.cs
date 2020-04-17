@@ -1,14 +1,14 @@
-﻿using CoreSignalR3.Request;
+﻿using System.Text.Json;
+using CoreSignalR3.Request;
 using Infrastructure.Model.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace CoreSignalR3.Controllers
 {
-    public class NoAuthorizeMessageController:ControllerBase
+    public class NoAuthorizeMessageController:BaseController
     {
         private readonly ILogger<NoAuthorizeMessageController> _logger;
         private readonly IHubContext<NoAuthorizeHub> _hubcontext;
@@ -19,14 +19,15 @@ namespace CoreSignalR3.Controllers
             _hubcontext = hubcontext;
         }
 
-        [HttpPost]
+        [HttpPost("PushMessage")]
+        [ProducesResponseType(typeof(BasePageResponse<BaseResponse>), 1)]
         public async Task<BaseResponse>  PushMessage([FromBody]PushMessageRequest request)
         {
-            _logger.LogInformation("PushMessage:" + JsonConvert.SerializeObject(request));
-          
-            await _hubcontext.Clients.Group(request.UserId.ToString()).SendAsync("PushMessage",JsonConvert.SerializeObject(request));
+            var message = JsonSerializer.Serialize (request);
+            _logger.LogInformation("PushMessage:" + message);
+           
+            await _hubcontext.Clients.Group(request.UserId.ToString()).SendAsync("PushMessage",message);
             return BaseResponse.Ok();
         }
-
     }
 }

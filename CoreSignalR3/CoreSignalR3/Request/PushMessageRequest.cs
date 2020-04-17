@@ -5,7 +5,7 @@
         /// <summary>
         /// 消息实体
         /// </summary>
-        public object Content { get; set; }
+        public dynamic Content { get; set; }
         /// <summary>
         /// 推送到的用户id 
         /// </summary>

@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /YiApi/YiApi.EntityFrameworkCore/Migrations
+/CoreSignalR3/CoreSignalR3/logs
