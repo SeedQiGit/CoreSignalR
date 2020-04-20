@@ -230,10 +230,9 @@ namespace CoreSignalR3
     public static class CustomExtensionsMethods
     {
         /// <summary>
-        /// 个性化集成
+        /// 
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="configuration"></param>
         /// <returns></returns>
         public static IServiceCollection AddRabbitmq(this IServiceCollection services)
         {
