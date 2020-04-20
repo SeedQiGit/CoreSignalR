@@ -26,6 +26,7 @@ namespace CoreSignalR3
                     configuration
                         .MinimumLevel.Information()
                         .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                        .MinimumLevel.Override("System", LogEventLevel.Information)
                         .Enrich.FromLogContext()
                         .WriteTo.File(Path.Combine("logs", @"log.txt"), rollingInterval: RollingInterval.Hour);
                 });
