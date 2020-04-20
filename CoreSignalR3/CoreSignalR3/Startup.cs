@@ -1,3 +1,5 @@
+using CoreSignalR3.Mq;
+using CoreSignalR3.Mq.EventHandler;
 using Infrastructure.Extensions;
 using Infrastructure.Middlewares;
 using Infrastructure.Model.Enums;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RabbitMQ.Client;
 using StackExchange.Redis;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -170,6 +173,23 @@ namespace CoreSignalR3
 
             #endregion
 
+            #region Rabbitmq
+
+            services.AddRabbitmq();
+            ConfigureRabbitMqClient(services);
+
+            #endregion
+
+        }
+
+        /// <summary>
+        /// 配置RabbitMqClient订阅
+        /// </summary>
+        /// <param name="services"></param>
+        private void ConfigureRabbitMqClient(IServiceCollection services)
+        {
+            services.AddSingleton<RabbitMqClient>();
+            services.AddHostedService<NormalEventHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -204,6 +224,42 @@ namespace CoreSignalR3
             });
 
             ServiceProviderExtension.ServiceProvider = app.ApplicationServices;
+        }
+    }
+
+    public static class CustomExtensionsMethods
+    {
+        /// <summary>
+        /// 个性化集成
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddRabbitmq(this IServiceCollection services)
+        {
+            var section = SettingManager.GetSection("RabbitMqSettings");
+            string connectionString = section.GetSection("RabbitMqConnection").Value;
+            string userName = section.GetSection("RabbitMqUserName").Value;
+            string password = section.GetSection("RabbitMqPwd").Value;
+
+            var factory = new ConnectionFactory()
+            {
+                HostName = connectionString,
+                AutomaticRecoveryEnabled = true,
+                RequestedHeartbeat = TimeSpan.FromSeconds(15)
+            };
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                factory.UserName = userName;
+            }
+
+            if (!string.IsNullOrEmpty(password))
+            {
+                factory.Password = password;
+            }
+            services.AddSingleton(factory);
+            return services;
         }
     }
 }
