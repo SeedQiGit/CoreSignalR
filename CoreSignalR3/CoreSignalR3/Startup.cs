@@ -30,7 +30,11 @@ namespace CoreSignalR3
             #region MVC
 
             //AddControllersWithViews 是mvc项目使用  api可以直接AddControllers
-            services.AddControllersWithViews()
+            services.AddControllersWithViews(options =>
+                {
+                    // 异常处理  使用中间件的异常处理吧
+                    //options.Filters.Add(typeof(HttpGlobalExceptionFilter<Exception>));
+                })
                 .AddJsonOptions(options =>
                 {
                     //options.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
@@ -176,24 +180,24 @@ namespace CoreSignalR3
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
-            
+
             // 配置跨域
             app.UseCors("CorsPolicy");
-    
+
             app.UseRouting();
             // app.UseAuthorization() must appear between app.UseRouting() and app.UseEndpoints(...).
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseExceptionHandling();
-           
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<NoAuthorizeHub>("/noAuthorizeHub",options =>
-                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
-                endpoints.MapHub<BihuHub>("/bihuHub",options =>
-                    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
+                endpoints.MapHub<NoAuthorizeHub>("/noAuthorizeHub", options =>
+                     options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
+                endpoints.MapHub<BihuHub>("/bihuHub", options =>
+                     options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransports.All);
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action}");
